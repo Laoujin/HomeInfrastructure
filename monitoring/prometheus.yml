@@ -1,0 +1,7 @@
+lobal:
+  scrape_interval: 160s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

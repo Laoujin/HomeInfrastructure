@@ -1,0 +1,52 @@
+version: '3.8'
+name: monitoring
+
+services:
+  # loki:
+  #   image: grafana/loki:latest
+  #   ports: [ "3100:3100" ]
+  #   volumes: [ "./loki-config.yaml:/etc/loki/local-config.yaml" ]
+
+  # promtail:
+  #   image: grafana/promtail:latest
+  #   volumes:
+  #     - "/var/log:/var/log"             # host logs
+  #     - "/etc/promtail:/etc/promtail"   # your config
+  #     - "/var/lib/docker/containers:/var/lib/docker/containers"
+  #   command: -config.file=/etc/promtail/promtail-config.yaml
+
+  # prometheus:
+  #   image: prom/prometheus
+  #   ports: [ "9090:9090" ]
+  #   volumes:
+  #     - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+
+  # node-exporter:
+  #   image: prom/node-exporter
+  #   ports: [ "9100:9100" ]
+
+  # cadvisor:
+  #   image: gcr.io/cadvisor/cadvisor:latest
+  #   ports: [ "8080:8080" ]
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:rw
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    restart: unless-stopped
+    ports: [ "3000:3000" ]
+    # user: '1026'
+    # environment:
+    #   - GF_SERVER_ROOT_URL=http://my.grafana.server/
+    #   - GF_PLUGINS_PREINSTALL=grafana-clock-panel
+    #   - GF_LOG_MODE=console file
+    #   - GF_LOG_LEVEL=debug
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  grafana-storage:
