@@ -6,6 +6,7 @@ services:
     image: grafana/loki
     container_name: monitoring_loki
     ports: [ "${LOKI_PORT}:3100" ]
+    user: '${UID}'
     command: -config.file=/etc/loki/local-config.yaml
     volumes: [ "./loki-config.yaml:/etc/loki/local-config.yaml" ]
     networks:
