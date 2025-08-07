@@ -1,7 +1,16 @@
-lobal:
-  scrape_interval: 160s
+global:
+  scrape_interval: 60s
 
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['localhost:9090']
+      # - targets:
+      #     - 'localhost:9090'
+      #   labels:
+      #     group: local
+
+      - targets:
+          - '192.168.1.5:7209'
+          - '192.168.1.5:7300'
+        labels:
+          group: 'ttc'
