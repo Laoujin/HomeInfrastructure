@@ -11,3 +11,10 @@ cd monitoring
 cp .sample.env .env
 docker-compose up -d
 ```
+
+### Grafana Alert
+
+- Alerting > Contact points > Create contact point > Slack
+    - [Webhook Url](https://api.slack.com/apps) > Incoming Webhooks
+- Alerting > Alert rules > New alert rule
+    - `count_over_time({level="error"}[5m])`
