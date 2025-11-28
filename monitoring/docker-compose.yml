@@ -7,6 +7,7 @@ services:
     container_name: monitoring_loki
     ports: [ "${LOKI_PORT}:3100" ]
     user: '${UID}'
+    restart: ${RESTART_POLICY}
     command: -config.file=/etc/loki/local-config.yaml
     volumes: [ "./loki-config.yaml:/etc/loki/local-config.yaml" ]
     networks:
@@ -16,6 +17,7 @@ services:
     image: grafana/alloy
     container_name: monitoring_alloy
     ports: [ "12345:12345" ]
+    # restart: ${RESTART_POLICY}
     volumes:
       - "./alloy.config:/etc/alloy/config.alloy"
       - ./logs:/tmp/app-logs/
@@ -27,6 +29,7 @@ services:
   prometheus:
     image: prom/prometheus
     ports: [ "9090:9090" ]
+    # restart: ${RESTART_POLICY}
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml"
 
